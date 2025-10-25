@@ -44,16 +44,14 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="container mx-auto px-4 py-6 flex justify-between items-center border-b border-gray-100">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg"></div>
-          <span className="text-xl font-bold text-gray-900">
-            QuestionnaireAI
+      <header className="container mx-auto px-6 py-5 flex justify-between items-center border-b border-gray-100 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+        {/* Logo + Brand Name */}
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 bg-gradient-to-br from-blue-600 to-cyan-400 rounded-xl shadow-sm"></div>
+          <span className="text-2xl font-semibold tracking-tight text-gray-900">
+            Questionnaire<span className="text-blue-600">AI</span>
           </span>
         </div>
-        <button className="text-gray-600 hover:text-gray-900 font-medium transition">
-          Sign in
-        </button>
       </header>
 
       {/* Hero Section */}
@@ -463,37 +461,18 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Demo Video Section */}
       <section className="container mx-auto px-4 py-20">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 text-center mb-4">
-            See it in action
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            How it works
           </h2>
-          <p className="text-gray-600 text-center mb-12 text-xl">
-            Watch how QuestionnaireAI fills a 100-question security
-            questionnaire in 60 seconds
-          </p>
 
-          <div className="bg-white rounded-3xl overflow-hidden shadow-2xl border border-gray-200">
-            <div className="aspect-video bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-24 h-24 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-6 cursor-pointer hover:scale-110 transition shadow-2xl">
-                  <svg
-                    className="w-12 h-12 text-white ml-1"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
-                  </svg>
-                </div>
-                <p className="text-gray-700 font-semibold text-lg mb-2">
-                  Watch demo video
-                </p>
-                <p className="text-gray-500">
-                  60-second product walkthrough (Coming soon)
-                </p>
-              </div>
-            </div>
+          <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-gray-200">
+            <video
+              src="/Automate Security Questionnaires Now-VEED.mp4" // replace with your video path or URL
+              controls
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
       </section>
