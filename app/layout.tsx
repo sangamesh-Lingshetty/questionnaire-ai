@@ -13,29 +13,36 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "QuestionnaireAI — Auto-fill Security & Compliance Forms",
+  metadataBase: new URL("https://getquest.cloud"),
+  title: "GetQuest — Auto-fill Security & Compliance Forms",
   description:
-    "Save 4–6 hours per vendor review. QuestionnaireAI automatically fills security and compliance questionnaires using your company PDFs and Excel sheets. Built for fast-moving startups and compliance teams.",
+    "GetQuest auto-fills ISO 27001 & SOC 2 compliance questionnaires using your policies, PDFs and Excel files. Save 4–6 hours per vendor review.",
   keywords: [
+    "GetQuest",
     "AI compliance tool",
     "security questionnaire automation",
+    "ISO 27001 AI",
+    "SOC 2 questionnaire automation",
     "vendor risk management",
     "third-party compliance",
-    "SaaS automation",
+    "GRC automation",
+    "SaaS security automation",
   ],
-  authors: [{ name: "Sangamesh Lingshetty" }],
+  icons: {
+    icon: "/favicon-v2.ico", // final icon
+  },
   openGraph: {
-    title: "QuestionnaireAI — AI-powered Security Questionnaire Assistant",
+    title: "GetQuest — AI-powered Security Questionnaire Assistant",
     description:
-      "Speed up vendor reviews by 10x with QuestionnaireAI. Auto-fill compliance questionnaires from PDFs and Excel sheets instantly.",
-    url: "https://questionnaire-ai.vercel.app",
-    siteName: "QuestionnaireAI",
+      "Speed up vendor reviews by 10x with GetQuest. Auto-fill compliance questionnaires from PDFs and Excel sheets instantly.",
+    url: "https://getquest.cloud",
+    siteName: "GetQuest",
     images: [
       {
-        url: "", // (optional) add your logo/preview image in /public folder
+        url: "/logo.png",
         width: 1200,
         height: 630,
-        alt: "QuestionnaireAI Preview",
+        alt: "GetQuest Logo — AI Security Automation",
       },
     ],
     locale: "en_US",
@@ -45,11 +52,34 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
+      <head>
+        {/* Canonical URL for SEO */}
+        <link rel="canonical" href="https://getquest.cloud" />
+
+        {/* Logo Schema for Google */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "GetQuest",
+              url: "https://getquest.cloud",
+              logo: "https://getquest.cloud/logo.png",
+              sameAs: [
+                "https://twitter.com/YOUR_HANDLE",
+                "https://www.linkedin.com/in/YOUR_LINK",
+              ],
+            }),
+          }}
+        />
+      </head>
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
