@@ -1,32 +1,48 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseURL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+// ============================================
+// SUPABASE CLIENT CONFIGURATION
+// ============================================
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-if (!supabaseURL || !supabaseAnonKey) {
-  throw new Error(
-    "Missing supabase environment variable. check your .env.local file."
-  );
-}
-
-// client or frontend uses the anon key
-export const supabase = createClient(supabaseURL, supabaseAnonKey, {
-  auth: {
-    autoRefreshToken: true,
-    persistSession: true,
-  },
-});
-
-// CLIENT FOR BACKEND/API ROUTES (uses service role)
-
-export function createServiceClient() {
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-  if (!serviceRoleKey) {
-    throw new Error("Missing SUPABASE_SERVICE_ROLE_KEY");
+// ============================================
+// CLIENT FOR FRONTEND (uses anon key)
+// Respects Row Level Security
+// ============================================
+function createBrowserClient(): SupabaseClient {
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error(
+      'Missing Supabase environment variables. Check your .env.local file.'
+    );
   }
 
-  return createClient(supabaseURL, serviceRoleKey, {
+  return createClient(supabaseUrl, supabaseAnonKey, {
+    auth: {
+      autoRefreshToken: true,
+      persistSession: true,
+    },
+  });
+}
+
+export const supabase = createBrowserClient();
+
+// ============================================
+// CLIENT FOR BACKEND/API ROUTES (uses service role)
+// Bypasses Row Level Security - use carefully!
+// ============================================
+export function createServiceClient(): SupabaseClient {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!url || !serviceRoleKey) {
+    throw new Error(
+      'Missing Supabase environment variables: NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY'
+    );
+  }
+
+  return createClient(url, serviceRoleKey, {
     auth: {
       autoRefreshToken: false,
       persistSession: false,
@@ -34,8 +50,9 @@ export function createServiceClient() {
   });
 }
 
+// ============================================
 // TYPESCRIPT TYPES FOR DATABASE
-
+// ============================================
 export interface Document {
   id: string;
   user_id: string;
@@ -46,7 +63,6 @@ export interface Document {
   created_at: string;
   updated_at: string;
 }
-
 
 export interface Questionnaire {
   id: string;
